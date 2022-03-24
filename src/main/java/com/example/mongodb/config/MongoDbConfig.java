@@ -14,6 +14,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 세팅 참고 url: https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/mongoclientsettings/
+ */
 @Configuration
 @EnableMongoRepositories(basePackages = "com.example.mongodb.repository")
 public class MongoDbConfig {
