@@ -1,6 +1,7 @@
 package com.example.mongodb.repository;
 
 import com.example.mongodb.model.GroceryItem;
+import com.mongodb.client.MongoClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,9 @@ public class MongoTemplateTest {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private MongoClient mongoClient;
 
     @Test
     public void saveAndFindTest() {
@@ -96,5 +100,8 @@ public class MongoTemplateTest {
         mongoTemplate.remove(groceryItem);
     }
 
-    
+    @Test
+    public void transactionTest() {
+
+    }
 }

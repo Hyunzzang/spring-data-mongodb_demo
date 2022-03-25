@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -18,7 +19,8 @@ import java.util.concurrent.TimeUnit;
  * 세팅 참고 url: https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/connection/mongoclientsettings/
  */
 @Configuration
-@EnableMongoRepositories(basePackages = "com.example.mongodb.repository")
+@EnableMongoRepositories(basePackages = "com.example.mongodb.repository",
+        mongoTemplateRef = "mongoTemplate")
 public class MongoDbConfig {
 
     @Value("${spring.data.mongodb.connect}")
@@ -48,5 +50,10 @@ public class MongoDbConfig {
     @Bean
     public MongoTemplate mongoTemplate(MongoDatabaseFactory mongoDatabaseFactory) {
         return new MongoTemplate(mongoDatabaseFactory);
+    }
+
+    @Bean
+    public MongoTransactionManager transactionManager(MongoDatabaseFactory mongoDatabaseFactory) {
+        return new MongoTransactionManager(mongoDatabaseFactory);
     }
 }
